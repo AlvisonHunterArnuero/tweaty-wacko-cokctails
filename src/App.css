@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=PT+Sans+Narrow:wght@400;700&display=swap');
+body{
+  background-color: #041C32;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.cocktail-name{
+  font-family: 'Architects Daughter', cursive;
+  color: #C84B31 !important;
+  font-weight: regular;
+  font-size: 2.6rem !important;
+  letter-spacing: 4px;
+}
+
+.text-success {
+  color: #A7D129 !important;
+}
+
+.text-danger {
+  color: #FF0000 !important;
+}
+
+.text-warning {
+  color: #FFD700 !important;
+}
+
+.text-info {
+  color: #00FFF5 !important;
+}
+
+.text-primary {
+  color: #0D63A5 !important;
+}
+
+.text-secondary {
+  color: #9153F4 !important;
+}
+
+.text-muted {
+  color: #6B778D !important;
+}
+
+/*---- BG Colors -----*/
+.bg-success {
+  color: #A7D129 !important;
+}
+
+.bg-danger {
+  background-color: #FF0000 !important;
+  color: #fff !important;
+}
+
+.bg-warning {
+  background-color: #FFD700 !important;
+  color: #000 !important;
+}
+
+.bg-info {
+  background-color: #00FFF5 !important;
+  color: #000 !important;
+}
+
+.bg-primary {
+  background-color: #0D63A5 !important;
+  color: #fff !important;
+}
+
+.bg-secondary {
+  background-color: #9153F4 !important;
+  color: #fff !important;
+}
+
+.bg-muted {
+  background-color: #6B778D !important;
+  color: #000 !important;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.logo{
+  color: green;
+  font-size: 30px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
