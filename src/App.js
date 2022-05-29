@@ -13,9 +13,18 @@ function App() {
     fetchCocktail,
     setFetchCocktail,
     currentInstructions,
-    setCurrentInstructions,fetchCocktailbyName, setFetchCocktailbyName
+    setCurrentInstructions,
+    fetchCocktailbyName,
+    setFetchCocktailbyName,
   } = useContext(CocktailsContext);
-const [currentAnimation, setCurrentAnimation] = useState("fade-down");
+  const [currentAnimation, setCurrentAnimation] = useState("fade-down");
+
+  // Main App Functions
+
+  /**
+   * Get a Random Value from the animation array to use it in the app cards with different animations.
+   * @return {string} A random value of the animation array.
+   */
 
   const onScrollRndAnimation = () => {
     const animations = [
@@ -28,26 +37,52 @@ const [currentAnimation, setCurrentAnimation] = useState("fade-down");
       "zoom-in-down",
       "zoom-out-up",
       "flip-up",
-      "fade-left"
+      "fade-left",
     ];
-    return setCurrentAnimation(animations[Math.floor(Math.random() * animations.length)]);
+    return setCurrentAnimation(
+      animations[Math.floor(Math.random() * animations.length)]
+    );
   };
 
-  window.addEventListener("scroll", ()=>{onScrollRndAnimation()});
+  /**
+   * When Scrolling this App, the onScrollRndAnimation function is called.
+   * @return {CallBackFunction} It calls the onScrollRndAnimation function.
+   */
 
-  const handleFlagsClick = (e) => {
-    setCurrentInstructions(e);
+  window.addEventListener("scroll", () => {
+    onScrollRndAnimation();
+  });
+
+  /**
+   * When clicking on this set of letters, API is called requesting data starting with this letter.
+   * @param {string} letter - The string containing the chosen letter.
+   * @return {void} It sets the CurrentInstructions Context State property with a new value.
+   */
+  const handleFlagsClick = (letter) => {
+    setCurrentInstructions(letter);
   };
+
+  /**
+   * When typing search terms, the API is called to retrieve data which name is similar to this value
+   * @param {object} e - The object containing the value needed for this mutation.
+   * @return {void} It sets the FetchCocktailbyName Context State property with a new value.
+   */
 
   const handleSearchClick = (e) => {
     setFetchCocktailbyName(e.target.value);
   };
 
+  /**
+   * When Clicking in any of these letters, API is called requesting data starting with clicked letter
+   * @param {object} e - The object containing the value needed for this mutation.
+   * @return {void} It sets the FetchColails Context State property with a new value.
+   */
   const handleLettersClick = (e) => {
     e.preventDefault();
     setFetchCocktail(e.target.innerText);
   };
 
+  // State properties and rendering cases management
   useEffect(() => {
     getAPIResults();
     // eslint-disable-next-line
@@ -72,24 +107,24 @@ const [currentAnimation, setCurrentAnimation] = useState("fade-down");
             COCKTAILS
           </p>
         </div>
-        <div className="col-12 col-md-6 text-info">
-        <nav aria-label='Page navigation example'>
-          <ul className='pagination justify-content-center'>
-            {alphabet.map((elem) => {
-              return (
-                <li key={elem} className='page-item'>
-                  <a
-                    onClick={(e) => handleLettersClick(e)}
-                    href='/'
-                    className='page-link bg-dark text-warning fs-6'
-                  >
-                    {elem}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+        <div className='col-12 col-md-6 text-info'>
+          <nav aria-label='Page navigation example'>
+            <ul className='pagination justify-content-center'>
+              {alphabet.map((elem) => {
+                return (
+                  <li key={elem} className='page-item'>
+                    <a
+                      onClick={(e) => handleLettersClick(e)}
+                      href='/'
+                      className='page-link bg-dark text-warning fs-6'
+                    >
+                      {elem}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
 
         <div className='col-12 col-md-3 mx-auto'>
@@ -107,108 +142,139 @@ const [currentAnimation, setCurrentAnimation] = useState("fade-down");
             </span>
           </div>
         </div>
- 
       </div>
 
       <div className='row justify-content-around align-items-center mt-5'>
-        {isLoading ? <Spinner /> :
+        {isLoading ? (
+          <Spinner />
+        ) : (
           cocktails.map((item) => {
             return (
-            <div data-aos={currentAnimation} data-aos-easing="linear"
-            data-aos-duration="900">
-              <div className='col-8 mx-auto' key={item.idDrink}>
-              <div className="card my-2 border-danger text-white bg-dark" style={{maxWidth: "540px;"}}>
-  <div className="row g-0">
-    <div className="col-md-4">
-      <img src={item.strDrinkThumb}
-                      className='img-fluid rounded-start'
-                      alt={item.strDrink}
-                      title={item.strDrink}
-                    />
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <h5 className="card-title fs-2 my-3 text-white cocktail-name">{item.strDrink}</h5>
-        <h6 className='card-subtitle mb-2 text-muted'>
-        Category:  <span className='badge rounded-pill bg-primary mx-1'>{item.strCategory}</span>
-        Alcoholic: <span className='badge rounded-pill bg-secondary mx-1'>{item.strAlcoholic}</span>
-        Glass Type: <span className='badge rounded-pill bg-danger mx-1'>{item.strGlass}</span>
-        Tags: <span className='badge rounded-pill bg-danger mx-1'>{item.strTags}</span>
-        
-                    </h6>
-                    <div className='card-text'>
-                      
-                      <div className='row justify-content-between align-items-center'>
-                        <div className="col"><strong className='text-info text-uppercase'>Instructions: </strong></div>
-                        <div className='col text-end'>
-                          Translations: <button
-                            type='button'
-                            className='border-0 fs-3 btn'
-                             onClick={(e) => handleFlagsClick("En")}
-                          >
-                            🇬🇧
-                          </button>
-                
-                          <button
-                            type='button'
-                            className='border-0 fs-3 btn'
-                             onClick={(e) => handleFlagsClick("De")}
-                          >
-                            🇩🇪
-                          </button>
-                        
-                          <button
-                            type='button'
-                            className='border-0 fs-3 btn'
-                             onClick={(e) => handleFlagsClick("It")}
-                          >
-                            🇫🇷
-                          </button>
-                        </div>
+              <div
+                data-aos={currentAnimation}
+                data-aos-easing='linear'
+                data-aos-duration='900'
+              >
+                <div className='col-8 mx-auto' key={item.idDrink}>
+                  <div
+                    className='card my-2 border-danger text-white bg-dark'
+                    style={{ maxWidth: "540px;" }}
+                  >
+                    <div className='row g-0'>
+                      <div className='col-md-4'>
+                        <img
+                          src={item.strDrinkThumb}
+                          className='img-fluid rounded-start'
+                          alt={item.strDrink}
+                          title={item.strDrink}
+                        />
                       </div>
-                      <div className='row mb-1 mx-1'>
-                        {currentInstructions==="En" ? item.strInstructions: currentInstructions==="It" ? item.strInstructionsIT:item.strInstructionsDE}
+                      <div className='col-md-8'>
+                        <div className='card-body'>
+                          <h5 className='card-title fs-2 my-3 text-white cocktail-name'>
+                            {item.strDrink}
+                          </h5>
+                          <h6 className='card-subtitle mb-2 text-muted'>
+                            Category:{" "}
+                            <span className='badge rounded-pill bg-primary mx-1'>
+                              {item.strCategory}
+                            </span>
+                            Alcoholic:{" "}
+                            <span className='badge rounded-pill bg-secondary mx-1'>
+                              {item.strAlcoholic}
+                            </span>
+                            Glass Type:{" "}
+                            <span className='badge rounded-pill bg-danger mx-1'>
+                              {item.strGlass}
+                            </span>
+                            Tags:{" "}
+                            <span className='badge rounded-pill bg-danger mx-1'>
+                              {item.strTags}
+                            </span>
+                          </h6>
+                          <div className='card-text border-top mt-3'>
+                            <div className='row justify-content-between align-items-center '>
+                              <div className='col'>
+                                <strong className='text-info text-uppercase'>
+                                  Instructions:{" "}
+                                </strong>
+                              </div>
+                              <div className='col text-end'>
+                                Translations:{" "}
+                                <button
+                                  type='button'
+                                  className='border-0 fs-3 btn'
+                                  onClick={(e) => handleFlagsClick("En")}
+                                >
+                                  🇬🇧
+                                </button>
+                                <button
+                                  type='button'
+                                  className='border-0 fs-3 btn'
+                                  onClick={(e) => handleFlagsClick("De")}
+                                >
+                                  🇩🇪
+                                </button>
+                                <button
+                                  type='button'
+                                  className='border-0 fs-3 btn'
+                                  onClick={(e) => handleFlagsClick("It")}
+                                >
+                                  🇫🇷
+                                </button>
+                              </div>
+                            </div>
+                            <div className='row mb-1 mx-1'>
+                              {currentInstructions === "En"
+                                ? item.strInstructions
+                                : currentInstructions === "It"
+                                ? item.strInstructionsIT
+                                : item.strInstructionsDE}
+                            </div>
+                          </div>
+                          <div className='card-text border-top pt-2 mt-2'>
+                            <div className='row'>
+                              <strong className='text-success text-uppercase'>
+                                Ingredients:{" "}
+                              </strong>
+                            </div>
+                            <div className='row justify-content-between align-items-center small'>
+                              <div className='col-3'>
+                                <span className='text-warning'>
+                                  {item.strIngredient1}
+                                </span>
+                              </div>
+                              <div className='col-3'>
+                                <span className='text-warning'>
+                                  {item.strIngredient2}
+                                </span>
+                              </div>
+                              <div className='col-3'>
+                                <span className='text-warning'>
+                                  {item.strIngredient3}
+                                </span>
+                              </div>
+                              <div className='col-3'>
+                                <span className='text-warning'>
+                                  {item.strIngredient4}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <p className='card-text border-top mt-3'>
+                            <small class='text-muted'>
+                              Last updated on {item.dateModified}
+                            </small>
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <div className='card-text border-top pt-2 mt-2'>
-                      <div className='row'>
-                        <strong className='text-success text-uppercase'>Ingredients: </strong>
-                      </div>
-                      <div className='row justify-content-between align-items-center small'>
-                        <div className='col-3'>
-                          <span className='text-warning'>
-                            {item.strIngredient1}
-                          </span>
-                        </div>
-                        <div className='col-3'>
-                          <span className='text-warning'>
-                            {item.strIngredient2}
-                          </span>
-                        </div>
-                        <div className='col-3'>
-                          <span className='text-warning'>
-                            {item.strIngredient3}
-                          </span>
-                        </div>
-                        <div className='col-3'>
-                          <span className='text-warning'>
-                            {item.strIngredient4}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-        <p className="card-text"><small class="text-muted">Last updated on {item.dateModified}</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-
- 
-
+                  </div>
                 </div>
               </div>
             );
-          })}
+          })
+        )}
         <div className='col'></div>
       </div>
     </div>
@@ -216,7 +282,3 @@ const [currentAnimation, setCurrentAnimation] = useState("fade-down");
 }
 
 export default App;
-
-
-
-
