@@ -90,8 +90,9 @@ font-family: 'PT Sans Narrow', sans-serif;
   pointer-events: none;
 }
 .logo{
-  color: green;
+  color:#FF5722;
   font-size: 30px;
+  padding:5px;
 }
 
 .App-link {
@@ -101,5 +102,9 @@ font-family: 'PT Sans Narrow', sans-serif;
 
 .card{
   opacity: 0.90 !important;
+}
+
+footer{
+  background-color: #241E92 !important;
 }
 

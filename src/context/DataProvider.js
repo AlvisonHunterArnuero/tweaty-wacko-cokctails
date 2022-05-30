@@ -9,6 +9,7 @@ const DataProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [pageNotFound, setPageNotFound] = useState(false);
   const [currentInstructions, setCurrentInstructions] = useState("En");
+  const [currentAnimation, setCurrentAnimation] = useState("flip-up");
  
 
   // API fetch event to retrieve the data needed on this component
@@ -62,7 +63,7 @@ const DataProvider = ({ children }) => {
         isLoading,
         setIsLoading,
         pageNotFound,
-        setPageNotFound,
+        setPageNotFound,currentAnimation, setCurrentAnimation,
         currentInstructions,
         setCurrentInstructions,fetchCocktailbyName, setFetchCocktailbyName
       }}

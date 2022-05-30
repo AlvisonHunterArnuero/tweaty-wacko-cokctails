@@ -28,4 +28,20 @@
     "Z",
   ];
 
+  export const animations = [
+    "fade-up",
+    "fade-left",
+    "fade-right",
+    "flip-up",
+    "flip-right",
+    "flip-left",
+    "flip-down",
+    "zoom-in",
+    "zoom-in-up",
+    "zoom-out-up",
+    "zoom-in-left",
+    "fade-down-right",
+    "fade-up-right",
+  ];
+
   
