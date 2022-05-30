@@ -17,7 +17,7 @@ function App() {
     fetchCocktailbyName,
     setFetchCocktailbyName,
   } = useContext(CocktailsContext);
-  const [currentAnimation, setCurrentAnimation] = useState("fade-down");
+  const [currentAnimation, setCurrentAnimation] = useState("flip-up");
 
   // Main App Functions
 
@@ -29,15 +29,18 @@ function App() {
   const onScrollRndAnimation = () => {
     const animations = [
       "fade-up",
-      "fade-down",
-      "flip-left",
+      "fade-left",
+      "fade-right",
       "flip-up",
       "flip-right",
+      "flip-left",
+      "flip-down",
       "zoom-in",
-      "zoom-in-down",
+      "zoom-in-up",
       "zoom-out-up",
-      "flip-up",
-      "fade-left",
+      "zoom-in-left",
+      "fade-down-right",
+      "fade-up-right",
     ];
     return setCurrentAnimation(
       animations[Math.floor(Math.random() * animations.length)]
@@ -52,35 +55,6 @@ function App() {
   window.addEventListener("scroll", () => {
     onScrollRndAnimation();
   });
-
-  /**
-   * When clicking on this set of letters, API is called requesting data starting with this letter.
-   * @param {string} letter - The string containing the chosen letter.
-   * @return {void} It sets the CurrentInstructions Context State property with a new value.
-   */
-  const handleFlagsClick = (letter) => {
-    setCurrentInstructions(letter);
-  };
-
-  /**
-   * When typing search terms, the API is called to retrieve data which name is similar to this value
-   * @param {object} e - The object containing the value needed for this mutation.
-   * @return {void} It sets the FetchCocktailbyName Context State property with a new value.
-   */
-
-  const handleSearchClick = (e) => {
-    setFetchCocktailbyName(e.target.value);
-  };
-
-  /**
-   * When Clicking in any of these letters, API is called requesting data starting with clicked letter
-   * @param {object} e - The object containing the value needed for this mutation.
-   * @return {void} It sets the FetchColails Context State property with a new value.
-   */
-  const handleLettersClick = (e) => {
-    e.preventDefault();
-    setFetchCocktail(e.target.innerText);
-  };
 
   // State properties and rendering cases management
   useEffect(() => {
@@ -101,12 +75,14 @@ function App() {
   return (
     <div className='container-fluid pt-5'>
       <div className='row py-2 justify-content-between align-items-center fixed-top bg-dark'>
+
         <div className='col-12 col-md-2 mx-auto'>
           <p className='text-start text-info fs-3'>
             <i className='fa-solid fa-martini-glass-citrus logo'></i> WACKO
             COCKTAILS
           </p>
         </div>
+
         <div className='col-12 col-md-6 text-info'>
           <nav aria-label='Page navigation example'>
             <ul className='pagination justify-content-center'>
@@ -114,7 +90,7 @@ function App() {
                 return (
                   <li key={elem} className='page-item'>
                     <a
-                      onClick={(e) => handleLettersClick(e)}
+                      onClick={(e) =>{e.preventDefault(); setFetchCocktail(e.target.innerText);}}
                       href='/'
                       className='page-link bg-dark text-warning fs-6'
                     >
@@ -131,7 +107,7 @@ function App() {
           <div className='input-group'>
             <input
               type='text'
-              onChange={(e) => handleSearchClick(e)}
+              onChange={(e) => setFetchCocktailbyName(e.target.value)}
               className='form-control'
               placeholder='Type in your search'
               aria-label='Type in your search'
@@ -142,7 +118,9 @@ function App() {
             </span>
           </div>
         </div>
-      </div>
+
+      </div> {/* This is the end of the Fixed Nav Row, at the top of the page  */}
+
 
       <div className='row justify-content-around align-items-center mt-5'>
         {isLoading ? (
@@ -157,9 +135,7 @@ function App() {
               >
                 <div className='col-8 mx-auto' key={item.idDrink}>
                   <div
-                    className='card my-2 border-danger text-white bg-dark'
-                    style={{ maxWidth: "540px;" }}
-                  >
+                    className='card my-2 text-white bg-dark shadow-lg mb-5 rounded'>
                     <div className='row g-0'>
                       <div className='col-md-4'>
                         <img
@@ -204,21 +180,23 @@ function App() {
                                 <button
                                   type='button'
                                   className='border-0 fs-3 btn'
-                                  onClick={(e) => handleFlagsClick("En")}
+                                  data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"
+                                  onClick={(e) => setCurrentInstructions("En")}
                                 >
                                   🇬🇧
                                 </button>
                                 <button
                                   type='button'
                                   className='border-0 fs-3 btn'
-                                  onClick={(e) => handleFlagsClick("De")}
+                                  data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"
+                                  onClick={(e) => setCurrentInstructions("De")}
                                 >
                                   🇩🇪
                                 </button>
                                 <button
                                   type='button'
                                   className='border-0 fs-3 btn'
-                                  onClick={(e) => handleFlagsClick("It")}
+                                  onClick={(e) => setCurrentInstructions("It")}
                                 >
                                   🇫🇷
                                 </button>
@@ -235,23 +213,23 @@ function App() {
                           <div className='card-text border-top pt-2 mt-2'>
                             <div className='row'>
                               <strong className='text-success text-uppercase'>
-                                Ingredients:{" "}
+                                Ingredients:
                               </strong>
                             </div>
                             <div className='row justify-content-between align-items-center small'>
                               <div className='col-3'>
                                 <span className='text-warning'>
-                                  {item.strIngredient1}
+                                <i class="fa-solid fa-circle-1"></i> {item.strIngredient1}
                                 </span>
                               </div>
                               <div className='col-3'>
                                 <span className='text-warning'>
-                                  {item.strIngredient2}
+                                {item.strIngredient2}
                                 </span>
                               </div>
                               <div className='col-3'>
                                 <span className='text-warning'>
-                                  {item.strIngredient3}
+                                {item.strIngredient3}
                                 </span>
                               </div>
                               <div className='col-3'>
