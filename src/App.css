@@ -13,9 +13,9 @@ font-family: 'PT Sans Narrow', sans-serif;
 .cocktail-name{
   font-family: 'Architects Daughter', cursive;
   color: #C84B31 !important;
-  font-weight: regular;
-  font-size: 2.6rem !important;
-  letter-spacing: 4px;
+  font-weight: bold;
+  font-size: 2rem !important;
+  letter-spacing: 3px;
 }
 
 .text-success {
