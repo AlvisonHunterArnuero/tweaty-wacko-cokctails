@@ -11,14 +11,14 @@ export const Header = () => {
       <ul className='pagination justify-content-center'>
         {alphabet.map((elem) => {
           return (
-            <li key={elem} className='page-item'>
+            <li key={elem}  className='page-item'>
               <a
                 onClick={(e) => {
                   e.preventDefault();
                   setFetchCocktail(e.target.innerText);
                 }}
                 href='/'
-                className='page-link bg-dark text-warning fs-6'
+                className="page-link bg-dark text-warning fs-6"
               >
                 {elem}
               </a>

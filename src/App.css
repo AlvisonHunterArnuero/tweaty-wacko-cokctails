@@ -104,7 +104,7 @@ font-family: 'PT Sans Narrow', sans-serif;
   opacity: 0.90 !important;
 }
 
-footer{
-  background-color: #241E92 !important;
+.disabled-link {
+  pointer-events: none;
 }
 
