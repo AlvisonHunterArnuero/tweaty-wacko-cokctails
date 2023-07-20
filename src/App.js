@@ -58,26 +58,31 @@ function App() {
   }, [fetchCocktailbyName]);
 
   return (
-    <div className='container-fluid'>
-      <div className='row my-auto px-3 pt-3 fixed-top bg-dark'>
-        <div className='col-12 col-md-2'>
-          <p className='text-start text-info fs-3'>
-            <i className='fa-solid fa-martini-glass-citrus logo'></i> WACKO
+    <div className="container-fluid">
+      <div className="row my-auto px-3 pt-3 fixed-top bg-dark">
+        <div className="col-12 col-md-2">
+          <p className="text-start text-info fs-3">
+            <i className="fa-solid fa-martini-glass-citrus logo"></i> WACKO
             COCKTAILS
           </p>
         </div>
 
-        <div className='col-12 col-md-6 text-info'>
+        <div className="col-12 col-md-6 text-info">
           <Header />
         </div>
 
-        <div className='col-12 col-md-4'>
+        <div className="col-12 col-md-4">
           <Search />
         </div>
-      </div> {/* This is the end of the Fixed Nav Row, at the top of the page  */}
-      <div className='row justify-content-around align-items-center mt-5'>
+      </div>{" "}
+      {/* This is the end of the Fixed Nav Row, at the top of the page  */}
+      <div className="row justify-content-around align-items-center mt-5">
         {isLoading ? (
-          <Spinner />
+          <Spinner
+            spinnerType="spinner-border"
+            textColor="text-primary"
+            spinnerCaption="Loading..."
+          />
         ) : (
           cocktails.map((item) => {
             return <Card item={item} />;

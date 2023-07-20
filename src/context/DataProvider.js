@@ -10,7 +10,6 @@ const DataProvider = ({ children }) => {
   const [pageNotFound, setPageNotFound] = useState(false);
   const [currentInstructions, setCurrentInstructions] = useState("En");
   const [currentAnimation, setCurrentAnimation] = useState("flip-up");
- 
 
   // API fetch event to retrieve the data needed on this component
   const getAPIResults = async () => {
@@ -31,17 +30,15 @@ const DataProvider = ({ children }) => {
   };
 
   const getAPIResultsByName = async () => {
-
     let urlByName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${fetchCocktailbyName}`;
     setIsLoading(true);
     const fetchedDataResultsByName = await fetch(urlByName);
-    
+
     if (fetchedDataResultsByName.status === 404) {
       setPageNotFound(true);
       return;
     } else {
       const res_JSON = await fetchedDataResultsByName.json();
-      console.log(res_JSON)
       let { drinks } = await res_JSON;
       setCocktails(drinks);
       setIsLoading(false);
@@ -63,9 +60,13 @@ const DataProvider = ({ children }) => {
         isLoading,
         setIsLoading,
         pageNotFound,
-        setPageNotFound,currentAnimation, setCurrentAnimation,
+        setPageNotFound,
+        currentAnimation,
+        setCurrentAnimation,
         currentInstructions,
-        setCurrentInstructions,fetchCocktailbyName, setFetchCocktailbyName
+        setCurrentInstructions,
+        fetchCocktailbyName,
+        setFetchCocktailbyName,
       }}
     >
       {children}
