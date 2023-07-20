@@ -1,7 +1,6 @@
 import { Button } from "./Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Micro Components/Button",
   component: Button,
@@ -71,9 +70,6 @@ export const Dark = {
   },
 };
 
-
-
-
 export const Outline = {
   args: {
     outline: true,
@@ -100,13 +96,12 @@ export const Small = {
   },
 };
 
-
 export const Disabled = {
   args: {
     size: "btn-lg",
     label: "Large Button",
     primary: true,
     backgroundColor: "dark",
-    disabled:true,
+    disabled: true,
   },
 };
