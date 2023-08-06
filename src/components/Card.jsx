@@ -43,10 +43,6 @@ export const Card = ({ item }) => {
                       childrenContent={item.strGlass}
                       badgeBGColor="bg-danger"
                     />
-                    <CustomBadge
-                      childrenContent={item.strTags}
-                      badgeBGColor="bg-warning"
-                    />
                   </div>
                 </h5>
                 <div className="card-text border-top mt-3 pt-2">
