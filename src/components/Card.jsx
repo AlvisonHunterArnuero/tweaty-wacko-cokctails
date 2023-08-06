@@ -11,7 +11,7 @@ export const Card = ({ item }) => {
     <div
       data-aos={currentAnimation}
       data-aos-easing="linear"
-      data-aos-duration="1000"
+      data-aos-duration="900"
     >
       <div className="col-8 mx-auto" key={item.idDrink}>
         <div className="card my-2 text-white bg-dark shadow-lg mb-4 rounded">
@@ -30,7 +30,7 @@ export const Card = ({ item }) => {
                   {item.strDrink}
                 </h5>
                 <h5 className="card-subtitle mb-2">
-                  <div className="row justify-content-between align-items-center">
+                  <div className="row justify-content-around align-items-center">
                     <CustomBadge
                       childrenContent={item.strCategory}
                       badgeBGColor="bg-primary"
