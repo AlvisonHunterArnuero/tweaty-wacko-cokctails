@@ -60,8 +60,8 @@ function App() {
   return (
     <div className="container-fluid">
       <div className="row my-auto px-3 pt-3 fixed-top bg-dark">
-        <div className="col-12 col-md-2">
-          <p className="text-start text-info fs-3">
+        <div className="col-12 col-md-3">
+          <p className="text-start text-info fs-3 mx-4">
             <i className="fa-solid fa-martini-glass-citrus logo"></i> WACKO
             COCKTAILS
           </p>
@@ -71,7 +71,7 @@ function App() {
           <Header />
         </div>
 
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-md-3">
           <Search />
         </div>
       </div>{" "}

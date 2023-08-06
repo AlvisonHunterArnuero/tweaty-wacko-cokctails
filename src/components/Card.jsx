@@ -11,7 +11,7 @@ export const Card = ({ item }) => {
     <div
       data-aos={currentAnimation}
       data-aos-easing="linear"
-      data-aos-duration="900"
+      data-aos-duration="1000"
     >
       <div className="col-8 mx-auto" key={item.idDrink}>
         <div className="card my-2 text-white bg-dark shadow-lg mb-4 rounded">
